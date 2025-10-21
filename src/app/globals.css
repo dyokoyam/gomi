@@ -24,3 +24,67 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* LW UI custom styles */
+.slide-template {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  color: white;
+  padding: 1rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.slide-template.business {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.slide-template.education {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.slide-template.creative {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.slide-template.minimal {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.page-editor {
+  border: 2px dashed #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.page-editor:hover {
+  border-color: #3b82f6;
+  background: white;
+}
+
+.question-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-row-clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-row-clickable:hover {
+  background-color: #f3f4f6 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
