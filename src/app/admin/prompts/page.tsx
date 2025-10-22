@@ -2,8 +2,11 @@
 
 // 独自プロンプト編集UIページ
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import AppHeader from "@/widgets/AppHeader";
 
 export default function PromptEditorPage() {
+  const router = useRouter();
   const [prompt, setPrompt] = useState("");
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
 
@@ -14,6 +17,12 @@ export default function PromptEditorPage() {
 
   return (
     <div className="container mx-auto p-6 max-w-3xl">
+      <AppHeader
+        title="管理画面"
+        onShowAdmin={() => router.push("/admin")}
+        onShowSettings={() => router.push("/settings")}
+        onStartNewProject={() => router.push("/projects/new")}
+      />
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-4">独自プロンプト編集</h3>
         <textarea rows={10} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="生成プロンプトを入力してください" value={prompt} onChange={(e) => setPrompt(e.target.value)} />

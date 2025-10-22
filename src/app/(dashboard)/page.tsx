@@ -60,7 +60,7 @@ export default function DashboardPage() {
         title="教材一覧"
         onShowAdmin={() => router.push("/admin")}
         onShowSettings={() => router.push("/settings")}
-        onStartNewProject={() => router.push("/(dashboard)/projects/new")}
+        onStartNewProject={() => router.push("/projects/new")}
       />
 
       <div id="home-screen" className="screen">
@@ -92,7 +92,8 @@ export default function DashboardPage() {
                   const filtered = projects.filter((p) => (p.name || "").toLowerCase().includes(search.toLowerCase()));
                   const project = filtered[idx];
                   if (!project) return;
-                  router.push("/(dashboard)/projects/new");
+                  const idOrIndex = project.id || String(projects.indexOf(project));
+                  router.push(`/projects/new?source=${encodeURIComponent(idOrIndex)}&step=4`);
                 }}
                 onDelete={deleteProject}
                 onNotify={pushNotification}

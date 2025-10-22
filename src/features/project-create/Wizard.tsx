@@ -8,6 +8,8 @@ import StepUpload from "@/features/project-create/StepUpload";
 import StepAssessment from "@/features/project-create/StepAssessment";
 import StepOutline from "@/features/project-create/StepOutline";
 import StepGenerateSlides from "@/features/project-create/StepGenerateSlides";
+import { useSearchParams } from "next/navigation";
+import { getProjects } from "@/entities/project/api";
 
 type WizardProps = {
   initialStep?: number;
@@ -22,6 +24,7 @@ export default function Wizard({ initialStep = 1 }: WizardProps) {
   const [progress, setProgress] = useState<number>(0);
   const [progressText, setProgressText] = useState<string>("スライドを作成しています...");
   const [generationDone, setGenerationDone] = useState<boolean>(false);
+  const params = useSearchParams();
 
   const pushNotification = (message: string, type: "success" | "error" | "info" = "success") => {
     setNotification({ message, type });
@@ -147,9 +150,29 @@ export default function Wizard({ initialStep = 1 }: WizardProps) {
   };
 
   useEffect(() => {
-    // 初期ロード: ステップ指定がある場合は反映
-    setCurrentStep(initialStep);
-  }, [initialStep]);
+    // クエリパラメータ解釈: source/step
+    const stepParam = Number(params.get("step") || initialStep);
+    setCurrentStep(Math.min(5, Math.max(1, stepParam)));
+
+    const source = params.get("source");
+    if (source) {
+      const list = getProjects();
+      const match = list.find((p, i) => (p.id || String(i)) === source);
+      if (match) {
+        // ディープコピーして新規ID未設定の複製として編集開始
+        const clone: Project = {
+          ...match,
+          id: undefined,
+          status: undefined,
+          completedAt: undefined,
+          createdAt: new Date().toISOString(),
+        };
+        setCurrentProject(clone);
+        setSelectedTemplate(clone.template || "");
+        setSelectedPageCount(clone.pageCount || 0);
+      }
+    }
+  }, [initialStep, params]);
 
   return (
     <div id="new-project-screen" className="screen">

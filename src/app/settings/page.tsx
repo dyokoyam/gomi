@@ -1,9 +1,18 @@
 "use client";
 
 // 設定ページ (テンプレ登録/クレジット残高 FR-002,027-029,019)
+import { useRouter } from "next/navigation";
+import AppHeader from "@/widgets/AppHeader";
 export default function SettingsPage() {
+  const router = useRouter();
   return (
     <div id="settings-screen" className="screen container mx-auto p-6">
+      <AppHeader
+        title="設定"
+        onShowAdmin={() => router.push("/admin")}
+        onShowSettings={() => router.push("/settings")}
+        onStartNewProject={() => router.push("/projects/new")}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-md p-6">
           <h3 className="text-xl font-bold text-gray-800 mb-4"><i className="fas fa-palette mr-2"></i>カスタムテンプレート</h3>

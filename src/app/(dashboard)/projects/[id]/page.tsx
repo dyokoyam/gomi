@@ -4,6 +4,7 @@
 import { useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getProjects, saveProjects } from "@/entities/project/api";
+import AppHeader from "@/widgets/AppHeader";
 
 export default function ProjectDetailPage() {
   const params = useParams<{ id: string }>();
@@ -21,6 +22,12 @@ export default function ProjectDetailPage() {
 
   return (
     <div className="container mx-auto p-6">
+      <AppHeader
+        title="プロジェクト作成"
+        onShowAdmin={() => router.push("/admin")}
+        onShowSettings={() => router.push("/settings")}
+        onStartNewProject={() => router.push("/projects/new")}
+      />
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800">{project.name}</h2>
         <p className="text-gray-600">{project.status === "completed" ? "完了" : "作成中"}</p>

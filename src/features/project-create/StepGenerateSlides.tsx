@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 type Props = {
   progress: number;
   progressText: string;
@@ -9,6 +11,7 @@ type Props = {
 };
 
 export default function StepGenerateSlides({ progress, progressText, done, onDownloadSlides, onDownloadAssessment }: Props) {
+  const router = useRouter();
   return (
     <div id="step-5" className="step-content bg-white rounded-lg shadow-md p-6">
       <div className="text-center">
@@ -34,6 +37,9 @@ export default function StepGenerateSlides({ progress, progressText, done, onDow
               <button id="download-assessment" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors" onClick={onDownloadAssessment}>
                 <i className="fas fa-download mr-2"></i>アセスメントをダウンロード
               </button>
+            </div>
+            <div className="mt-6">
+              <button className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors" onClick={() => router.push("/")}>ホームに戻る</button>
             </div>
           </div>
         )}

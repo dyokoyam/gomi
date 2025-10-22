@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Company } from "@/entities/user/model";
 import { getCompanies, saveCompanies } from "@/entities/user/api";
+import AppHeader from "@/widgets/AppHeader";
 
 export default function AdminUserNewPage() {
   const router = useRouter();
@@ -45,6 +46,12 @@ export default function AdminUserNewPage() {
 
   return (
     <div className="container mx-auto p-6 max-w-2xl">
+      <AppHeader
+        title="管理画面"
+        onShowAdmin={() => router.push("/admin")}
+        onShowSettings={() => router.push("/settings")}
+        onStartNewProject={() => router.push("/projects/new")}
+      />
       <div className="bg-white rounded-lg shadow-md p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-6">新規ユーザー登録</h3>
         <form className="space-y-6" onSubmit={submit}>

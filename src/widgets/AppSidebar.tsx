@@ -8,7 +8,7 @@ export default function AppSidebar() {
       <div className="font-bold text-gray-800 mb-4">メニュー</div>
       <nav className="space-y-2">
         <Link className="block px-3 py-2 rounded hover:bg-gray-100" href="/">ダッシュボード</Link>
-        <Link className="block px-3 py-2 rounded hover:bg-gray-100" href="/(dashboard)/projects/new">新規作成</Link>
+        <Link className="block px-3 py-2 rounded hover:bg-gray-100" href="/projects/new">新規作成</Link>
         <Link className="block px-3 py-2 rounded hover:bg-gray-100" href="/settings">設定</Link>
         <Link className="block px-3 py-2 rounded hover:bg-gray-100" href="/admin">管理</Link>
       </nav>
