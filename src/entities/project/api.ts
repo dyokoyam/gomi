@@ -1,8 +1,10 @@
 "use client";
 
 import type { Project } from "./model";
+import { sampleProjects } from "@/mocks/projects";
 
 const PROJECTS_KEY = "educationMaterialProjects";
+const SHOULD_SEED = process.env.NEXT_PUBLIC_SEED_PROJECTS === "true";
 
 function isBrowser() {
   return typeof window !== "undefined" && typeof localStorage !== "undefined";
@@ -10,13 +12,10 @@ function isBrowser() {
 
 function seedIfEmpty() {
   if (!isBrowser()) return;
+  if (!SHOULD_SEED) return;
   const saved = localStorage.getItem(PROJECTS_KEY);
   if (saved) return;
-  const samples: Project[] = [
-    { name: "サンプルプロジェクト1", createdAt: new Date("2024-01-15").toISOString(), status: "completed", slideCount: 15, template: "business" },
-    { name: "サンプルプロジェクト2", createdAt: new Date("2024-02-10").toISOString(), status: "completed", slideCount: 20, template: "education" },
-  ];
-  localStorage.setItem(PROJECTS_KEY, JSON.stringify(samples));
+  localStorage.setItem(PROJECTS_KEY, JSON.stringify(sampleProjects));
 }
 
 export function getProjects(): Project[] {

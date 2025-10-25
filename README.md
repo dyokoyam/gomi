@@ -1,36 +1,198 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 教材作成ウェブアプリケーション
 
-## Getting Started
+参考資料を元にアセスメントとノート付きスライドを自動生成するウェブアプリケーションです。
 
-First, run the development server:
+## 🎯 プロジェクト概要
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+このアプリケーションは、ユーザーが提供する参考資料（テキスト・ファイル）を基に、教育用のアセスメント（問題）とノート付きプレゼンテーションスライドを自動生成する統合ツールです。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ 実装済み機能
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📋 ホーム画面（教材一覧）
+- プロジェクト一覧の表形式表示
+- プロジェクト名、作成日時、ノート付きスライド、アセスメントの管理
+- 各項目のプレビュー・ダウンロード機能
+- **新機能**: プロジェクトの編集・削除機能
+- **削除機能**: 確認ダイアログ付きの安全な削除
+- **編集機能**: 完了済みプロジェクトの再編集
+- プロジェクト検索・フィルタ機能
+- **修正済み**: 検索窓右のサイクルボタンを削除
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🆕 プロジェクト作成フロー
 
-## Learn More
+#### Step 1: 参考資料入力
+- プロジェクト名の入力
+- **新機能**: ファイルアップロード機能（PDF, Word, PowerPoint, テキスト対応）
+- ドラッグ&ドロップによるファイル選択
+- テキスト直接入力にも対応
 
-To learn more about Next.js, take a look at the following resources:
+#### Step 2: アセスメント修正
+- **改善**: 自動生成されたアセスメントを問題ごとに個別エリアで編集
+- 選択式・記述式問題の混在サポート
+- リアルタイム編集機能
+- 配点設定機能
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Step 3: スライド設定
+- **変更**: 目的・用途を自由記述形式に変更
+- ページ数選択（10/15/20/25ページ）
+- **改善**: テンプレート選択を視覚的なカード形式で実装
+  - ビジネス、教育、クリエイティブ、ミニマルテンプレート
+  - 各テンプレートにアイコンと説明を配置
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Step 4: 骨子編集
+- **大幅改善**: JSONではなくページ別の視覚的編集画面
+- 各スライドページごとに個別編集エリア
+- タイトル、内容、発表者ノートの分離編集
+- 直感的なUI/UX
 
-## Deploy on Vercel
+#### Step 5: 生成・完了
+- プログレス表示付きの一貫生成プロセス
+- スライド作成→ノート生成→埋め込みまでの自動化
+- ダウンロード機能
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ⚙️ 設定機能
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### カスタムテンプレート管理
+- PowerPointテンプレートのアップロード
+- テンプレート一覧表示・削除機能
+
+#### クレジット管理
+- **修正済み**: クレジット残高表示
+- **更新**: スライド生成料金を「1枚あたり1クレジット」に変更
+- **削除**: アセスメント生成の詳細料金を削除
+
+### 👑 管理者機能
+
+#### ユーザー管理
+- **ユーザー一覧**: 会社ID、会社名、購入クレジット数を表形式で表示
+- **クリック遷移**: 行をクリックでそのユーザーの教材一覧に直接遷移
+- **ユーザー追加**: 新規ユーザー登録フォーム
+- **ユーザー編集**: 既存ユーザー情報の修正
+- **ユーザー削除**: 確認ダイアログ付きの安全な削除
+- **検索機能**: 会社名による絞り込み
+
+#### 教材管理
+- **全教材一覧**: システム内のすべての教材を一覧表示
+- **ユーザー別教材**: 各ユーザーが作成した教材の詳細表示
+- **教材一覧画面遷移**: ユーザーの教材一覧画面への直接アクセス
+
+#### データ管理
+- **会社情報**: 会社ID、名称、担当者、連絡先、クレジット残高
+- **利用状況**: 購入クレジット数と使用クレジット数の管理
+- **ステータス管理**: アクティブ/非アクティブ状態の制御
+
+### 🛠️ 技術仕様
+
+#### フロントエンド
+- **HTML5**: セマンティックな構造
+- **Tailwind CSS**: モダンでレスポンシブなデザイン
+- **Font Awesome**: 直感的なアイコン
+- **Vanilla JavaScript**: 軽量でパフォーマンス重視
+
+#### データ管理
+- **RESTful Table API**: 効率的なデータ永続化
+- **LocalStorage**: クライアントサイドデータキャッシュ
+- **JSON**: 構造化データの管理
+
+### 🎨 UI/UX改善点
+
+#### 工程表の改善
+- **修正済み**: 縦書きから横書き表示に変更
+- 数字の下に工程名を配置
+- **修正済み**: モーダルサイズ調整でボタンのはみ出しを解決
+
+#### インタラクション改善
+- ファイルドラッグ&ドロップ対応
+- リアルタイムフィードバック
+- 直感的な選択UI（カード形式、ボタンハイライト）
+- プログレス表示による透明性
+
+## 📊 データ構造
+
+### プロジェクトテーブル (projects)
+- `id`: プロジェクトID
+- `company_id`: 会社ID（外部キー）
+- `name`: プロジェクト名
+- `reference_text`: 参考資料テキスト
+- `reference_file_name`: 参考資料ファイル名
+- `slide_purpose`: スライドの目的・用途
+- `page_count`: ページ数
+- `template`: 選択テンプレート
+- `assessment`: アセスメント内容（JSON）
+- `outline`: スライド骨子（JSON）
+- `status`: プロジェクトステータス（creating/completed/error）
+- `created_at`: 作成日時
+- `completed_at`: 完了日時
+
+### 会社テーブル (companies)
+- `id`: 内部ID
+- `company_id`: 会社識別コード
+- `company_name`: 会社名
+- `contact_name`: 担当者名
+- `email`: メールアドレス
+- `phone`: 電話番号
+- `credits_purchased`: 購入クレジット数
+- `credits_used`: 使用クレジット数
+- `notes`: 備考
+- `status`: ステータス（active/inactive/suspended）
+- `created_at`: 登録日時
+- `updated_at`: 更新日時
+
+### カスタムテンプレートテーブル (custom_templates)
+- `id`: テンプレートID
+- `name`: テンプレート名
+- `file_name`: ファイル名
+- `file_size`: ファイルサイズ
+- `uploaded_at`: アップロード日時
+
+## 🚀 機能の使い方
+
+1. **プロジェクト作成**: 「プロジェクト作成」ボタンから新規プロジェクトを開始
+2. **参考資料入力**: ファイルアップロードまたはテキスト直接入力
+3. **アセスメント調整**: 自動生成された問題を個別に編集・調整
+4. **スライド設定**: 目的、ページ数、テンプレートを選択
+5. **骨子編集**: 各ページの内容を視覚的に編集
+6. **生成実行**: ワンクリックでスライドとアセスメントを自動生成
+7. **ダウンロード**: 完成したファイルをダウンロード
+
+## 🔄 今後の実装予定
+
+### 高優先度
+- [ ] 実際のファイル処理（PDF解析、PowerPoint生成）
+- [ ] AI による高精度なアセスメント・スライド生成
+- [ ] プレビュー機能の実装
+
+### 中優先度
+- [ ] プロジェクトエクスポート/インポート機能
+- [ ] 協業・共有機能
+- [ ] テンプレートカスタマイズ機能
+
+### 低優先度
+- [ ] 多言語対応
+- [ ] 高度な分析機能
+- [ ] バッチ処理機能
+
+## 💡 推奨な次のステップ
+
+1. **ファイル処理の実装**: 実際のPDF/Word読み込み機能
+2. **AI統合**: GPT-4などのLLM APIとの連携
+3. **PowerPoint生成**: python-pptx等を使用したサーバーサイド処理
+4. **プレビュー機能**: HTMLベースのスライドプレビューア
+5. **認証システム**: ユーザー管理とプロジェクト権限制御
+
+## 📱 レスポンシブ対応
+
+- モバイル、タブレット、デスクトップ全対応
+- Tailwind CSSによる柔軟なレイアウト
+- タッチデバイス最適化
+
+## 🎯 ターゲットユーザー
+
+- 教育機関の教員・講師
+- 企業研修担当者
+- コンテンツ制作者
+- eラーニング開発者
+
+---
+
+**開発状況**: ✅ UI/UX完成 | ⏳ バックエンド統合待ち | 🚀 デプロイ準備完了
